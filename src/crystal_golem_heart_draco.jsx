@@ -16,8 +16,7 @@ export function CrystalHeart(props) {
   const { nodes, materials } = useGLTF('/Assets/crystal_golem_heart_draco.glb')
   useFrame((state) => {
     const t = state.clock.getElapsedTime()
-    ref.current.rotation.set(0.1 + Math.cos(t / 4.5) / 10, Math.sin(t / 4) / 4, 0.3 - (1 + Math.sin(t / 4)) / 8)
-    ref.current.position.y = (1 + Math.sin(t / 2)) / 10
+    ref.current.rotation.set(0, t/2, 0) 
   })
   return (
     <group {...props} dispose={null}>
