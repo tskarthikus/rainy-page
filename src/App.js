@@ -110,18 +110,20 @@ function RainParticles({ count = 1200 }) {
       // manually inject numbers into property. so that it won't trigger re-render.
       let pos = refPoints.current.geometry.getAttribute('position');
       refPoints.current.geometry.setAttribute('position', pos);
-      let isModified = false;
-      for (let i = 0; i <= pos.array.length; i+=3) {
-        if (pos.array[i+1] < -1){
-          pos.array[i+1] = 3;
+      if (Math.ceil(t)%2 < 2)
+      {
+        for (let i = 0; i <= pos.array.length; i+=3) {
+          if (pos.array[i+1] < -1){
+            pos.array[i+1] = 3;
+          }
+          pos.array[i+1] -= t * 0.0005;
         }
-        pos.array[i+1] -= t * 0.0005;
+        refPoints.current.geometry.setAttribute('position', pos);
+        // console.log(Math.ceil(t)%2);
       }
-      refPoints.current.geometry.setAttribute('position', pos);
-      refPoints.current.geometry.attributes.position.needsUpdate = true;
+      refPoints.current.geometry.attributes.position.needsUpdate = true;      
       // state.requireUpdate = false;
     }
-    // refPoints.current.rotation.x += t * 0.0001;
   });
 
   return (
